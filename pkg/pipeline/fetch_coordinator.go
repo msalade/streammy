@@ -21,7 +21,7 @@ func FetchCoordinator[T any](
 	var wg sync.WaitGroup
 	wg.Add(parallelism)
 
-	for i := 0; i < parallelism; i++ {
+	for range parallelism {
 		go func() {
 			defer wg.Done()
 			for skip := range tasks {
