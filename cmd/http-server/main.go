@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"streammy/pkg/pipeline"
+	"streammy/pkg/sinks"
 	"streammy/pkg/sources"
 	"streammy/pkg/types"
 
@@ -59,7 +60,7 @@ func main() {
 			}
 		}()
 
-		sink := &pipeline.JSONSink[Post]{Writer: w}
+		sink := &sinks.XML[Post]{Writer: w}
 
 		if err := sink.Write(ctx, ch); err != nil && err != context.Canceled {
 			log.Println("sink error:", err)

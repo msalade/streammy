@@ -1,4 +1,4 @@
-package pipeline
+package sinks
 
 import (
 	"context"
@@ -6,14 +6,13 @@ import (
 	"io"
 )
 
-type JSONSink[T any] struct {
+type JSONL[T any] struct {
 	Writer io.Writer
 }
 
-func (s *JSONSink[T]) Write(ctx context.Context, in <-chan T) error {
+func (s *JSONL[T]) Write(ctx context.Context, in <-chan T) error {
 	enc := json.NewEncoder(s.Writer)
 	enc.SetEscapeHTML(false)
-
 	flusher, _ := s.Writer.(interface{ Flush() })
 
 	for {
